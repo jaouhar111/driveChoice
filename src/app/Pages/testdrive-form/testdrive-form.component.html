@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<div class="flex justify-center items-center min-h-screen bg-gray-900 py-16">
+    <!-- Container with Gap Between Sections -->
+    <div class="grid grid-cols-1 md:grid-cols-3 space-x-12 max-w-5xl">
+      
+      <!-- Left Section: Car Information -->
+      <div class="md:col-span-1 space-y-4 pt-12 pr-4 ">
+        <h2 class="text-2xl font-bold text-gray-100">Demander un test drive</h2>
+        <div class="bg-red-400 px-4 py-4 shadow-lg rounded-lg overflow-hidden">
+            <p class="text-white underline">{{car?.brand |titlecase}} - {{car?.model |titlecase}}</p>
+        <img class="w-full h-auto rounded-lg" [src]="car?.image_url" alt="Car Image">
+        <div class="flex justify-between items-center text-white">
+          <span>Type de carburant</span>
+          <span class="font-bold text-white">{{car?.other_details?.fuel_type}}</span>
+        </div>
+        </div>
+        
+        <div class='flex justify-end'>
+            <button [routerLink]="['/paiement', carId]" class='py-2.5 px-4 text-sm bg-red-500 text-white rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-red-700'>Reserver Vehicule</button>
+        </div>
+      </div>
+    
+      <!-- Right Section: Form -->
+      
+      <div class="md:col-span-2 text-white rounded-lg shadow-lg p-6 space-y-4">
+        <form [formGroup]="testDriveForm" (ngSubmit)="onSubmit()">
+        <div class="space-y-2 ">
+          <label for="date" class="block ">Date souhaitée</label>
+          <input type="date" formControlName="dateSouhaiter" class="w-full bg-black p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+        </div>
+  
+        <div class="space-y-2">
+          <label for="time" class="block ">Heure souhaitée</label>
+          <select formControlName="heureSouhaiter" class="w-full p-2 border bg-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+            <option>Veuillez sélectionner...</option>
+            <option value="a toute Heure">a toute Heure</option>
+            <option value="Matin">Matin</option>
+            <option value="Midi">Midi</option>
+            <option value="Soir">Soir</option>
+            <!-- Add time options here -->
+          </select>
+        </div>
+  
+        <div class="space-y-2">
+          <label for="message" class="block ">Message</label>
+          <textarea formControlName="message" rows="4" class="w-full p-2 bg-black border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+        </div>
+  
+        <div class="space-y-2">
+          <label for="civility" class="block ">Civilité *</label>
+          <select formControlName="civilite" class="w-full p-2 border bg-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+            <option>Veuillez sélectionner...</option>
+            <option value="Madame">Madame</option>
+            <option value="Monsieur">Monsieur</option>
+          </select>
+        </div>
+  
+        <div class="space-y-2">
+          <label for="firstName" class="block ">Prénom *</label>
+          <input type="text" formControlName="prenom" class="w-full bg-black p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+        </div>
+  
+        <div class="space-y-2">
+          <label for="lastName" class="block ">Nom *</label>
+          <input type="text" formControlName="nom" class="w-full p-2 bg-black border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+        </div>
+  
+        <div class="space-y-2">
+          <label for="email" class="block ">Adresse e-mail *</label>
+          <input type="email" formControlName="email" class="w-full p-2 bg-black border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+        </div>
+        <div class="space-y-2">
+          <label for="phone" class="block ">Numéro de contact *</label>
+          <input type="text" formControlName="phone" class="w-full p-2 border bg-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+        </div>
+        <div class='flex justify-center pt-4'>
+            <button type="submit" [disabled]="testDriveForm.invalid" class='py-2.5 px-24 text-sm  bg-red-500 text-white rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-red-700'>Envoyer</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

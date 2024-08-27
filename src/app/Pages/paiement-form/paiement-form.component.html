@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+<div class="flex h-screen bg-gray-100 overflow-hidden pt-16 shadow-md">
+    <!-- Left side - Fixed -->
+    <div class="w-1/3 p-6 bg-white shadow-lg overflow-hidden">
+      <div class="bg-red-300 rounded-lg">
+        <img [src]="car?.image_url" alt="Mercedes-Benz A" class="w-full h-auto mb-4 rounded-lg object-cover">
+      </div>
+      <h2 class="text-xl font-bold">{{ car?.brand | titlecase }}</h2>
+      <p class="text-gray-600">{{ car?.model | titlecase }}</p>
+      <p class="text-lg font-semibold mt-2">{{ car?.price }}</p>
+    </div>
+  
+    <!-- Right side - Scrollable -->
+    <div class="w-2/3 p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-600 scrollbar-track-gray-200">
+      <h1 class="text-2xl font-bold mb-6">{{ reservationPrice }} DH pour réserver</h1>
+  
+      <form [formGroup]="paiementForm"  class="space-y-4">
+        <div class="flex justify-between gap-8">
+          <div class="w-full">
+            <select  id="civility_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+              <option selected>Civilité *</option>
+              <option value="Madame">Madame</option>
+              <option value="Monsieur">Monsieur</option>
+            </select>
+          </div>
+  
+          <div class="w-full">
+            
+            <input type="text" formControlName="nom" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer" placeholder="Nom & Prenom *">
+            <div *ngIf="paiementForm.get('nom')?.invalid && paiementForm.get('nom')?.touched" class="text-danger">
+              Nom et Prenom is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between gap-8">
+          <div class="w-full">
+            <input type="email" formControlName="email" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer" placeholder="Email *">
+            <div *ngIf="paiementForm.get('email')?.invalid && paiementForm.get('email')?.touched" class="text-danger">
+              <div *ngIf="paiementForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="paiementForm.get('email')?.errors?.['email']">Enter a valid email.</div>
+            </div>
+          </div>
+  
+          <div class="w-full">
+            <input type="text" formControlName="phone" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer" placeholder="Phone *">
+            <div *ngIf="paiementForm.get('phone')?.invalid && paiementForm.get('phone')?.touched" class="text-danger">
+              <div *ngIf="paiementForm.get('phone')?.errors?.['required']">Phone number is required.</div>
+              <div *ngIf="paiementForm.get('phone')?.errors?.['pattern']">Enter a valid phone number.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between gap-8">
+          <div class="w-full">
+            <input type="text" formControlName="adresse" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer" placeholder="Ligne d'adresse 1 *">
+            <div *ngIf="paiementForm.get('adresse')?.invalid && paiementForm.get('adresse')?.touched" class="text-danger">
+              Adresse is required.
+            </div>
+          </div>
+  
+          <div class="w-full">
+            <input type="text" formControlName="ville" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer" placeholder="Ville *">
+            <div *ngIf="paiementForm.get('ville')?.invalid && paiementForm.get('ville')?.touched" class="text-danger">
+              Ville is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-200 px-4 py-8 rounded-md">
+          <h3 class="font-semibold mb-2">Votre paiement</h3>
+          <p class="text-sm text-gray-600 mb-2">Tous les paiements sont 100% sécurisés et cryptés</p>
+          <div class="flex space-x-2 mb-2">
+            <img src="https://cdn.worldvectorlogo.com/logos/visa-5.svg" alt="Visa" class="h-8">
+            <img src="https://cdn.worldvectorlogo.com/logos/mastercard-4.svg" alt="Mastercard" class="h-8">
+            <img src="https://cdn.worldvectorlogo.com/logos/american-express-1.svg" alt="American Express" class="h-8">
+          </div>
+          <input type="text" formControlName="carte" placeholder="Numéro de carte" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 peer">
+          <div *ngIf="paiementForm.get('carte')?.invalid && paiementForm.get('carte')?.touched" class="text-danger">
+            <div *ngIf="paiementForm.get('carte')?.errors?.['required']">Carte is required.</div>
+            <div *ngIf="paiementForm.get('carte')?.errors?.['pattern']">Enter a valid 16-digit card number.</div>
+          </div>
+          
+          <div class="flex justify-between gap-8 mt-4">
+            <input type="text" formControlName="expiration" placeholder="MM/AA" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 peer">
+            <div *ngIf="paiementForm.get('expiration')?.invalid && paiementForm.get('expiration')?.touched" class="text-danger">
+              <div *ngIf="paiementForm.get('expiration')?.errors?.['required']">Expiration date is required.</div>
+              <div *ngIf="paiementForm.get('expiration')?.errors?.['pattern']">Enter a valid expiration date in MM/YY format.</div>
+            </div>
+            <input type="text" formControlName="cvc" placeholder="CVC" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 peer">
+            <div *ngIf="paiementForm.get('cvc')?.invalid && paiementForm.get('cvc')?.touched" class="text-danger">
+              <div *ngIf="paiementForm.get('cvc')?.errors?.['required']">CVC is required.</div>
+              <div *ngIf="paiementForm.get('cvc')?.errors?.['pattern']">Enter a valid 3 or 4 digit CVC.</div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="flex items-center">
+          <input type="checkbox" id="terms" formControlName="terms" name="terms" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+          <label for="terms" class="ml-2 block text-sm text-gray-900">
+            Merci de confirmer si vous êtes bien en accord avec nos <a href="#" class="text-indigo-600 hover:text-indigo-500">conditions générales de vente et d'utilisation</a>.
+          </label>
+        </div>
+  
+        <div class="bg-gray-100 p-4 rounded-md text-sm">
+          <p class="font-semibold">VALIDER VOTRE COMMANDE</p>
+          <p>Merci d'avoir choisi AutoExchange pour réserver votre véhicule. Vous serez redirigé vers une page sécurisée pour effectuer votre paiement. Dès que le montant de la réservation sera traité et que les conditions générales seront acceptées, vous recevrez un e-mail de confirmation de paiement.</p>
+          <p class="mt-2">Votre numéro de commande sera visible sur la confirmation de la prise en charge de votre réservation et est considéré comme une commande pour vous rappeler le suivi du processus.</p>
+        </div>
+  
+        <div class="flex justify-between items-center mt-4">
+          <div>
+            <p class="font-semibold">Total à payer aujourd'hui</p>
+            <p class="text-2xl font-bold text-indigo-600">{{ reservationPrice }} DH</p>
+          </div>
+          <button type="button" (click)="onSubmit()" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            Soumettre le Paiement dès à Présent
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+<app-footer></app-footer>

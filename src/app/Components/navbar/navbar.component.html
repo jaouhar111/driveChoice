@@ -1,0 +1,70 @@
+<nav
+  class="fixed top-0 px-8 w-screen z-10 transition-all duration-300 ease-in-out bg-black">
+  <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0 text-white text-xl font-bold">
+        <a routerLink="/" class="flex items-center text-2xl font-semibold text-white dark:text-white">
+          Drive<span class="text-red-500">Choice</span>
+        </a>
+      </div>
+
+      <!-- Hamburger Menu for Mobile -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300"
+          (click)="isMenuOpen = !isMenuOpen"
+        >
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          <a routerLink="/" class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <a [routerLink]="['/about']" class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">About</a>
+          <a [routerLink]="['/feature']" class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>
+          <a [routerLink]="['/list']" routerLinkActive="router-link-active"  class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium cursor-pointer">Collection</a>
+          <a [routerLink]="['/faq']" class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">FAQ</a>
+          <button *ngIf="isLoggedIn" class="text-white hover:text-gray-200 text-2xl cursor-pointer" (click)="toggle()">
+            <i class="fa-solid fa-circle-user h-6 w-6 text-2xl"></i>
+          </button>
+          <button *ngIf="!isLoggedIn" class="text-black bg-white hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium" (click)="login()">
+            Login
+          </button>
+          <div *ngIf="isToggleOn" class="absolute z-10 top-16 right-4 bg-white divide-y divide-gray-100 rounded-lg shadow w-56">
+            <div id="userDropdown1" class=" z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
+              <ul class="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
+                <li><a [routerLink]="['/dashboard/bord']" routerLinkActive="router-link-active"  title="" class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Dashboard </a></li>
+                <li><a href="#" title="" class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My profile </a></li>
+              </ul>
+          
+              <div class="p-2 text-sm font-medium text-gray-900 dark:text-white">
+                <button (click)="handleSignOut()" class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100"> Sign Out </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Responsive Menu for Mobile -->
+  <div class="md:hidden" *ngIf="isMenuOpen">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a routerLink="/" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium">Home</a>
+      <a routerLink="/about" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium">About</a>
+      <a routerLink="/feature" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium">Features</a>
+      <a routerLink="/list" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium">Collection</a>
+      <a routerLink="/faq" class="block text-white hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium">FAQ</a>
+      <button *ngIf="isLoggedIn" class="block text-white hover:text-gray-300 text-2xl cursor-pointer px-3 py-2" (click)="toggle()">
+        <i class="fa-solid fa-circle-user h-6 w-6 text-2xl"></i>
+      </button>
+      <button *ngIf="!isLoggedIn" class="block text-black bg-white hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium" (click)="login()">
+        Login
+      </button>
+    </div>
+  </div>
+</nav>

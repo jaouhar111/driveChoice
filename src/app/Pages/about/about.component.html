@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="bg-black min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center">
+      <div class="absolute inset-0">
+        <img src="https://cdn-s-www.ledauphine.com/images/3AB31C2F-5C5A-43FA-8D27-E592EE04DE22/NW_raw/au-total-sept-styles-de-jantes-allant-de-19-a-21-pouces-sont-proposes-au-catalogue-de-la-porsche-911-le-modele-carrera-gts-chausse-des-jantes-exclusive-design-avec-des-ailettes-en-carbone-reduisant-le-coefficient-de-trainee-et-ameliorant-la-performance-les-pneus-sont-de-245-35-zr-20-a-l-avant-et-de-315-30-zr-21-a-l-arriere-1717074564.jpg" alt="Electric Car" class="w-full h-full object-cover">
+      </div>
+      <div class="relative z-10 container mx-auto px-6 text-white">
+        <h1 class="text-5xl font-bold mb-4">Discover Our Electric Vehicle Revolution</h1>
+        <p class="text-xl mb-8">Experience the future of transportation with cutting-edge technology and a growing focus on sustainability.</p>
+        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">Learn More</button>
+      </div>
+    </section>
+  
+    <!-- Features -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">Our Revolutionary Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div *ngFor="let feature of features" class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <div class="text-4xl text-red-600 mb-4">
+              <i class="fas fa-{{feature.icon}}"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">{{feature.title}}</h3>
+            <p class="text-gray-600">{{feature.description}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Accordion Section -->
+    <section class="py-16 bg-gray-100">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">Unleash the Potential & Redefine the Driving Experience</h2>
+        <div class="space-y-4">
+          <div *ngFor="let item of accordionItems" class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="w-full py-4 px-6 text-left font-semibold text-gray-800 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-300">
+              {{item.id}}. {{item.title}}
+            </button>
+            <div class="px-6 py-4 bg-gray-50">
+              <p class="text-gray-600">{{item.content}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Vehicle Lineup -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">Explore Our Electric Vehicle Lineup</h2>
+      <app-popular-cars></app-popular-cars>
+      </div>
+    </section>
+  </div>
+<app-footer></app-footer>

@@ -1,0 +1,75 @@
+<div class="flex items-center justify-center min-h-screen bg-black p-4">
+  <div class="w-full max-w-6xl bg-black text-white flex flex-col md:flex-row">
+    <!-- Left side - Login form -->
+    <div class="w-full md:w-1/2 p-8">
+      <h1 class="text-2xl font-bold mb-2">Drive<span class="text-red-500">Choice</span></h1>
+      <h1 class="text-2xl font-bold">Welcome Back Admin</h1>
+      <h2 class="text-xl mb-4">Please Enter your Account details</h2>
+      
+      <form  class="space-y-4">
+        <div>
+          <label for="email" class="block mb-2">Email</label>
+          <input type="email" id="email" name="email" 
+                 class="w-full p-3 rounded-lg bg-white text-black" 
+                 placeholder="Johndoe@gmail.com">
+        </div>
+        
+        <div>
+          <label for="password" class="block mb-2">Password</label>
+          <input type="password" id="password" name="password" 
+                 class="w-full p-3 rounded-lg bg-white text-black" 
+                 placeholder="••••••••">
+        </div>
+        
+        <div class="text-right">
+          <a href="#" class="text-red-500 hover:underline">Forgot Password</a>
+        </div>
+        
+        <button type="submit" class="w-full bg-red-500 text-white p-3 rounded-lg font-bold">
+          Sign in
+        </button>
+      </form>
+      
+      <div class="mt-8 flex justify-center space-x-4">
+        <button (click)="loginWithGoogle()" class="bg-white rounded-full p-2">
+          <img src="https://cdn.worldvectorlogo.com/logos/google-g-2015.svg" alt="Google" class="w-6 h-6">
+        </button>
+        <button class="bg-white rounded-full p-2">
+          <img src="https://cdn.worldvectorlogo.com/logos/outlook-1.svg" alt="Outlook" class="w-6 h-6">
+        </button>
+        <button class="bg-white rounded-full p-2">
+          <img src="https://cdn.worldvectorlogo.com/logos/facebook-2020-2-1.svg" alt="Facebook" class="w-6 h-6">
+        </button>
+      </div>
+    </div>
+    
+    <!-- Right side - Testimonial and info -->
+    <div class="w-full md:w-1/2 p-8 mt-8 md:mt-0">
+      <div class="rounded-3xl p-8 h-full relative overflow-hidden bg-cover bg-center" 
+           style="background-image: url('https://www.mercedes-benz.fr/content/france/fr/passengercars/models/estate/s214-24-1/amg/_jcr_content/root/responsivegrid/text_media_module/image.component.damq5.3426005828626.jpg/mercedes-amg-e-class-estate-s214-special-edition-01-1884x1884-02-2024.jpg');">
+        <h2 class="text-4xl font-bold mb-8">What Our Customers Say.</h2>
+        
+        <blockquote class="text-xl mb-8">
+          "Finding and purchasing your dream car is now easier than ever. Just browse our collection, choose your vehicle, and start your journey today."
+        </blockquote>
+        
+        <p class="font-bold text-xl">Mehdi JAOUHAR</p>
+        <p>Happy Car Owner</p>
+        
+        <div class="absolute bottom-8 right-8 flex space-x-2">
+          <button class="bg-white bg-opacity-20 p-2 rounded-full">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button class="bg-black p-2 rounded-full">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-white bg-opacity-10 rounded-full"></div>
+      </div>
+    </div>
+  </div>
+</div>

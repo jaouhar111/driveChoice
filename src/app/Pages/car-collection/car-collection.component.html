@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+<div class="bg-black text-white">
+    <main class="max-w-2xl lg:max-w-7xl">
+      <div class="py-48 px-8 h-full relative overflow-hidden bg-cover bg-center" 
+           style="background-image: url('https://cdn-s-www.ledauphine.com/images/3AB31C2F-5C5A-43FA-8D27-E592EE04DE22/NW_raw/au-total-sept-styles-de-jantes-allant-de-19-a-21-pouces-sont-proposes-au-catalogue-de-la-porsche-911-le-modele-carrera-gts-chausse-des-jantes-exclusive-design-avec-des-ailettes-en-carbone-reduisant-le-coefficient-de-trainee-et-ameliorant-la-performance-les-pneus-sont-de-245-35-zr-20-a-l-avant-et-de-315-30-zr-21-a-l-arriere-1717074564.jpg'); height: 400px;">
+        <h1 class="text-4xl font-bold tracking-tight">New Arrivals</h1>
+        <p class="mt-4 text-base">Explore our latest collection of luxury cars, featuring the newest models with cutting-edge</p>
+        <p class="text-base">technology and performance enhancements!</p>
+      </div>
+  
+      <div class="px-8 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
+        <aside>
+          <div class="lg:block">
+            <form class="space-y-10 divide-y divide-gray-200">
+              <div class="pt-10">
+                <fieldset>
+                  <legend class="block text-sm font-medium">Brands</legend>
+                  <div class="space-y-3 pt-6">
+                    <div *ngFor="let item of brands" class="flex items-center">
+                      <input 
+                        id="{{item}}" 
+                        [value]="item" 
+                        type="checkbox" 
+                        (change)="onBrandChange($event)" 
+                        class="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500">
+                      <label [for]="item" class="ml-3 text-sm">{{item}}</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="py-6">
+                <fieldset>
+                  <legend class="block text-sm font-medium">Color</legend>
+                  <div class="space-y-3 pt-6">
+                    <div *ngFor="let color of colors" class="flex items-center">
+                      <input 
+                        id="{{color}}" 
+                        [value]="color" 
+                        type="checkbox" 
+                        (change)="onColorChange($event)" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                      <label [for]="color" class="ml-3 text-sm">{{color}}</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </aside>
+  
+        <!-- Product grid -->
+        <div class="my-6 lg:col-span-2 lg:mt-8 xl:col-span-3">
+          <app-car-list [car]="filteredCars"></app-car-list>
+        </div>
+      </div>
+    </main>
+  </div>
+  <app-footer></app-footer>

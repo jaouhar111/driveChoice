@@ -1,0 +1,70 @@
+<div *ngIf="isOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white w-1/2 p-6 rounded-lg shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl text-black font-semibold">Add New Car</h2>
+        <button (click)="closeModal()" class="text-red-600 hover:text-red-800">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      
+      <form (ngSubmit)="addCar()">
+        <div class="flex justify-center z-0 w-full mb-5 group gap-4">
+            <label for="underline_select" class="sr-only">Brand</label>
+  <select [(ngModel)]="newCar.brand" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+      <option selected>Choose a Brand</option>
+      <option *ngFor="let item of brands" [value]="item">{{item}}</option>
+      
+  </select>
+            <input type="text" [(ngModel)]="newCar.model" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Model" />
+            
+        </div>
+
+        <div class="flex justify-center z-0 w-full mb-5 group gap-4">
+            <input type="text" [(ngModel)]="newCar.year" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="year"/>
+            
+            <input type="text" [(ngModel)]="newCar.price" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Price" />
+            
+        </div>
+        <h2 class="text-lg text-black font-semibold mb-4">Other Details</h2>
+        <!-- Add other fields as needed -->
+        <div class="flex justify-center z-0 w-full mb-5 group gap-4">
+            <input type="number" [(ngModel)]="newCar.other_details.city_mpg" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="city mpg"/>
+            
+            <input type="text" [(ngModel)]="newCar.other_details.combination_mpg" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="combination mpg" />
+            
+        </div>
+        <div class="flex justify-center z-0 w-full mb-5 group gap-4">
+            <input type="text" [(ngModel)]="newCar.other_details.cylinders" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="cylinders"/>
+            
+            <input type="text" [(ngModel)]="newCar.other_details.displacement" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="displacement" />
+           
+        </div>
+        <div class="flex justify-center z-0 w-full mb-5 group gap-4">
+            <input type="text"[(ngModel)]="newCar.other_details.drive" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="drive"/>
+            
+            <label for="underline_select" class="sr-only">fuel type</label>
+  <select [(ngModel)]="newCar.other_details.fuel_type" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+      <option selected>Choose fuel type</option>
+      <option value="Gas">Gas</option>
+      <option value="Electrique">Electrique</option>
+      <option value="Hybride">Hybride</option>
+  </select>
+        </div>
+        <div class="flex justify-center z-0 w-full mb-5 group gap-4">
+            <input type="text" [(ngModel)]="newCar.other_details.highway_mpg" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="highway_mpg"/>
+            
+            <label for="underline_select" class="sr-only">transmission</label>
+  <select id="underline_select" [(ngModel)]="newCar.other_details.transmission" [ngModelOptions]="{standalone: true}" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+      <option selected>Choose transmission</option>
+      <option value="A">Automatique</option>
+      <option value="M">Manuel</option>
+  </select>
+        </div>
+        <div class="flex justify-end">
+          <button type="button" (click)="closeModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Cancel</button>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Car</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
