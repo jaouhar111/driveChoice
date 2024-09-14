@@ -33,7 +33,7 @@
           <td class="px-6 py-4"><img class="w-20 h-20 rounded-full" [src]="car.image_url" alt="Jese image"></td>
           <td class="px-6 py-4">{{ car.brand }}</td>
           <td class="px-6 py-4">{{ car.model }}</td>
-          <td class="px-6 py-4">{{ car.other_details?.fuel_type }}</td>
+          <td class="px-6 py-4">{{ car.other_details.fuel_type }}</td>
           <td class="px-6 py-4">{{ car.year }}</td>
           <td class="px-6 py-4 flex items-center gap-2">
              <a [routerLink]="['/car', car.id]" class="font-medium hover:text-green-500 pt-8"><i class="fa-solid fa-eye"></i></a>
