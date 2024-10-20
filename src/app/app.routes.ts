@@ -17,6 +17,7 @@ import { AboutComponent } from './Pages/about/about.component';
 import { FeaturesComponent } from './Pages/features/features.component';
 import { DashPaiementComponent } from './Components/dash-paiement/dash-paiement.component';
 import { ArchievComponent } from './Components/archiev/archiev.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'list/:brand', component: CarCollectionComponent },
   { path: 'testDrive/:id', component: TestdriveFormComponent },
   { path: 'paiement/:id', component: PaiementFormComponent },
+  { path: 'profile', component: ProfileComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

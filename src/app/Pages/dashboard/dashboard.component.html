@@ -16,8 +16,7 @@
           [routerLinkActiveOptions]="{ exact: true }" class="hover:bg-gray-800 px-3 py-2 rounded-full"><i class="fa-solid fa-credit-card pr-2"></i>Paiement</a>
           <a [routerLink]="['/dashboard/message']" routerLinkActive="bg-white text-black"
           [routerLinkActiveOptions]="{ exact: true }"  class="hover:bg-gray-800 px-3 py-2 rounded-full"><i class="fa-solid fa-message pr-2"></i>Message</a>
-          <a [routerLink]="['/dashboard/archiev']" routerLinkActive="bg-white text-black" 
-          [routerLinkActiveOptions]="{ exact: true }" class="hover:bg-gray-800 px-3 py-2 rounded-full"><i class="fa-solid fa-folder pr-2"></i>History</a>
+          
         </nav>
       </div>
       <div class="flex items-center space-x-4">
@@ -27,11 +26,23 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
         </button>
-        <button class="bg-gray-800 p-2 rounded-full">
+        <button class="bg-gray-800 p-2 rounded-full" (click)="toggle()">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </button>
+        <div *ngIf="isToggleOn" class="absolute z-10 top-16 right-4 bg-white divide-y divide-gray-100 rounded-lg shadow w-56">
+          <div id="userDropdown1" class=" z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
+            <ul class="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
+              <li><a [routerLink]="['/dashboard/bord']" routerLinkActive="router-link-active"  title="" class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Dashboard </a></li>
+              
+            </ul>
+        
+            <div class="p-2 text-sm font-medium text-gray-900 dark:text-white">
+              <button (click)="handleSignOut()" class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100"> Sign Out </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   

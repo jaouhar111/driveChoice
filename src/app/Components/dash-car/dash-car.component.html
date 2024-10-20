@@ -1,20 +1,30 @@
 <div class="mx-12">
-    <span class="text-sm font-normal text-gray-500  mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-200 ">1-10</span> of <span class="font-semibold text-gray-200 ">{{filteredCars.length}}</span></span>
- 
- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div class="flex justify-between mb-4 items-center">
-       <div class="w-1/5">
-         <label for="brand_select" class="block mb-2 text-sm font-medium text-white">Select Brand</label>
-         <select id="brand_select" class="h-auto border bg-black border-gray-300 text-white text-base rounded-lg block w-full py-1.5 px-2 focus:outline-none" 
-                 (change)="onBrandChange($event)">
-           <option value="">All Brands</option>
-           <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
-         </select>
-       </div>
-       <button type='button' (click)="openAddCarModal()" class='py-2.5 px-6 text-sm rounded-full border border-solid border-red-200 text-red-600 cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-red-600 hover:text-white'><i class="fa-solid fa-car-on"></i> Add Car</button>
-     </div>
-   <!-- Include the modal component here -->
-   <app-add-car-modal (carAdded)="addCar($event)"></app-add-car-modal>
+      <div class="w-1/5">
+        <label for="brand_select" class="block mb-2 text-sm font-medium text-white">Select Brand</label>
+        <select 
+          id="brand_select" 
+          class="h-auto border bg-black border-gray-300 text-white text-base rounded-lg block w-full py-1.5 px-2 focus:outline-none"
+          (change)="onBrandChange($event)"
+        >
+          <option value="">All Brands</option>
+          @for (brand of brands(); track brand) {
+            <option [value]="brand">{{ brand }}</option>
+          }
+        </select>
+      </div>
+      <button 
+        type='button' 
+        (click)="openAddCarModal()" 
+        class='py-2.5 px-6 text-sm rounded-full border border-solid border-red-200 text-red-600 cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-red-600 hover:text-white'
+      >
+        <i class="fa-solid fa-car-on"></i> Add Car
+      </button>
+    </div>
+
+    <app-add-car-modal (carAdded)="addCar($event)"></app-add-car-modal>
+
     <table class="w-full text-sm text-left rtl:text-right text-white">
       <thead class="text-xs uppercase bg-gray-500">
         <tr>
@@ -24,26 +34,43 @@
           <th scope="col" class="px-6 py-3">Fuel</th>
           <th scope="col" class="px-6 py-3">Year</th>
           <th scope="col" class="px-6 py-3">Action</th>
-          <!-- Add other headers as needed -->
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let car of filteredCars" class="border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600">
- 
-          <td class="px-6 py-4"><img class="w-20 h-20 rounded-full" [src]="car.image_url" alt="Jese image"></td>
-          <td class="px-6 py-4">{{ car.brand }}</td>
-          <td class="px-6 py-4">{{ car.model }}</td>
-          <td class="px-6 py-4">{{ car.other_details.fuel_type }}</td>
-          <td class="px-6 py-4">{{ car.year }}</td>
-          <td class="px-6 py-4 flex items-center gap-2">
-             <a [routerLink]="['/car', car.id]" class="font-medium hover:text-green-500 pt-8"><i class="fa-solid fa-eye"></i></a>
-             <a href="#" class="font-medium hover:text-blue-500 pt-8"><i class="fa-solid fa-pen"></i></a>
-             <button  (click)="deleteCar(car.id!)" class="font-medium hover:text-red-500 pt-8"><i class="fa-regular fa-trash-can"></i></button>
-           </td>
-          <!-- Add other car data cells as needed -->
-        </tr>
+        @for (car of filteredCars() | paginate: { itemsPerPage: itemsPerPage(), currentPage: currentPage() }; track car.id) {
+          <tr class="border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600">
+            <td class="px-6 py-4">
+              <img class="w-20 h-20 rounded-full" [src]="car.image_url" [alt]="car.brand + ' ' + car.model">
+            </td>
+            <td class="px-6 py-4">{{ car.brand }}</td>
+            <td class="px-6 py-4">{{ car.model }}</td>
+            <td class="px-6 py-4">{{ car.other_details.fuel_type }}</td>
+            <td class="px-6 py-4">{{ car.year }}</td>
+            <td class="px-6 py-4 flex items-center gap-2">
+              <a [routerLink]="['/car', car.id]" class="font-medium hover:text-green-500 pt-8">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+              <a href="#" class="font-medium hover:text-blue-500 pt-8">
+                <i class="fa-solid fa-pen"></i>
+              </a>
+              <button (click)="deleteCar(car.id!)" class="font-medium hover:text-red-500 pt-8">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="px-6 py-4 text-center">No cars found</td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
- </div>
- 
+
+  <div class="mt-8 flex justify-center">
+    <pagination-controls 
+      (pageChange)="currentPage.set($event)"
+      class="pagination-controls"
+    ></pagination-controls>
+  </div>
+</div>

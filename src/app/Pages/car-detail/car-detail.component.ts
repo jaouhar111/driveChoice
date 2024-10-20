@@ -28,5 +28,5 @@ export class CarDetailComponent {
       this.car = car;
     });
   }
-  onFormClick() {}
+  
 }

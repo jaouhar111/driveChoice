@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestDrive } from '../../Interfaces/testDrive';
 import { CarDealershipServiceService } from '../../Services/car-dealership-service.service';
 import { EmailServiceService } from '../../Services/email/email-service.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ReservationDetailsModalComponent } from '../reservation-details-modal/reservation-details-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dash-message',
   standalone: true,
-  imports: [CommonModule, DatePipe, FormsModule],
+  imports: [
+    CommonModule,
+    DatePipe,
+    FormsModule,
+    NgxPaginationModule,
+    ReservationDetailsModalComponent,
+  ],
   templateUrl: './dash-message.component.html',
   styleUrl: './dash-message.component.css',
 })
@@ -16,10 +25,13 @@ export class DashMessageComponent {
   testDrives: TestDrive[] = [];
   filteredTestDrives: TestDrive[] = [];
   selectedStatus: string = '';
+  currentPage = signal<number>(1);
+  itemsPerPage = signal<number>(5);
 
   constructor(
     private carDealershipService: CarDealershipServiceService,
-    private emailService: EmailServiceService
+    private emailService: EmailServiceService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -69,13 +81,14 @@ export class DashMessageComponent {
           date.toString(),
           time
         );
-
-        console.log('Email sent successfully!', response.status, response.text);
+        this.toastr.success(`Email sent successfully!`, 'success', {
+          timeOut: 500,
+        });
       } else {
-        console.log('Test drive is not in a pending state.');
+        this.toastr.info('Test drive is not in a pending state.');
       }
     } catch (error) {
-      console.error('Error handling test drive confirmation:', error);
+      this.toastr.error(`Error handling test drive confirmation: ${error}`);
     }
   }
   // Method to handle Reject action
@@ -106,18 +119,14 @@ export class DashMessageComponent {
           date.toString(),
           time
         );
-        console.log(clientEmail);
-
-        console.log(
-          'Rejection email sent successfully!',
-          response.status,
-          response.text
-        );
+        this.toastr.success(`Rejection email sent successfully!`, 'success', {
+          timeOut: 500,
+        });
       } else {
-        console.log('Test drive is not in a pending state.');
+        this.toastr.info('Test drive is not in a pending state.');
       }
     } catch (error) {
-      console.error('Error handling test drive rejection:', error);
+      this.toastr.error(`Error handling test drive confirmation: ${error}`);
     }
   }
 }

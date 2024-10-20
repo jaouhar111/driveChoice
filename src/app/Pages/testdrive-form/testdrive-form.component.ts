@@ -13,6 +13,7 @@ import {
   Validators,
   FormsModule,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-testdrive-form',
   standalone: true,
@@ -35,7 +36,8 @@ export class TestdriveFormComponent {
   constructor(
     private carService: CarDealershipServiceService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.testDriveForm = this.fb.group({
       dateSouhaiter: ['', Validators.required],
@@ -69,13 +71,16 @@ export class TestdriveFormComponent {
         .bookTestDrive(booking)
         .then((docRef) => {
           this.testDriveForm.reset(); // Reset the form after successful submission
-          // Show success message
-          alert(
-            'Test drive submitted successfully! Keep an eye on your email for confirmation.'
+          this.toastr.success(
+            `Test drive submitted successfully! Keep an eye on your email for confirmation.`,
+            'success',
+            {
+              timeOut: 500,
+            }
           );
         })
         .catch((error) => {
-          alert(`Error booking test drive: ${error}`);
+          this.toastr.error(`Error booking test drive: ${error}`);
         });
     }
   }
